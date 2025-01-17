@@ -1,0 +1,31 @@
+id,date,amount,description,category
+1,2025-01-11,300000.0,movies,Entertainment
+2,2025-01-07,1500000.0,restaurants,Foods & Drinks
+3,2025-01-03,200000.0,Brizzi BRI,Topup
+4,2025-01-14,1000000.0,cable tv,Bills
+5,2025-01-11,500000.0,tuition,Education
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+7,2024-12-21,300000.0,miscellaneous,Others
+8,2025-01-10,1000000.0,cable tv,Bills
+9,2025-01-16,400000.0,weddings,Social Events
+10,2025-01-08,1000000.0,cable tv,Bills
+11,2024-12-28,1500000.0,restaurants,Foods & Drinks
+12,2025-01-01,1500000.0,restaurants,Foods & Drinks
+13,2024-12-21,500000.0,tuition,Education
+14,2025-01-06,500000.0,Gasoline,Transportation
+15,2024-12-17,500000.0,Gasoline,Transportation
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+17,2025-01-07,700000.0,Fashion,Shopping
+18,2025-01-12,400000.0,weddings,Social Events
+19,2025-01-14,300000.0,miscellaneous,Others
+20,2024-12-28,700000.0,Fashion,Shopping
+21,2024-12-27,200000.0,Brizzi BRI,Topup
+22,2025-01-05,500000.0,tuition,Education
+23,2024-12-23,300000.0,miscellaneous,Others
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+25,2025-01-11,500000.0,Gasoline,Transportation
+26,2024-12-19,300000.0,movies,Entertainment
+27,2025-01-05,500000.0,Gasoline,Transportation
+28,2024-12-17,200000.0,Brizzi BRI,Topup
+29,2025-01-16,1000000.0,cable tv,Bills
+30,2024-12-28,300000.0,miscellaneous,Others

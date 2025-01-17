@@ -1,0 +1,10 @@
+langchain
+langchain-core
+langchain-community
+langsmith
+langgraph
+pandas
+langchain-google-genai
+langchain-google-vertexai
+langchain-chroma
+pandasai

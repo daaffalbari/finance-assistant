@@ -1,0 +1,1279 @@
+2025-01-17 04:54:31 [INFO] Question: Apa pengeluaran terbesar saya?
+2025-01-17 04:54:31 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-17 04:54:31 [INFO] Prompt ID: ebd13477-1675-419c-907e-e942e572c53e
+2025-01-17 04:54:31 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-17 04:54:31 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-17 04:54:31 [INFO] Executing Step 1: CacheLookup
+2025-01-17 04:54:31 [INFO] Executing Step 2: PromptGeneration
+2025-01-17 04:54:31 [INFO] Using prompt: <dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Apa pengeluaran terbesar saya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-17 04:54:31 [INFO] Executing Step 3: CodeGenerator
+2025-01-17 04:54:31 [ERROR] AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x7abb6bad3820>" raised exception!
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 186, in __call__
+    response = self.session.request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/grpc/_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/credentials.py", line 409, in refresh
+    ) = reauth.refresh_grant(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/reauth.py", line 333, in refresh_grant
+    response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/_client.py", line 192, in _token_endpoint_request_no_throw
+    response = request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 192, in __call__
+    raise new_exc from caught_exc
+google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-01-17 04:54:31 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 Getting metadata from plugin failed with error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')).
+2025-01-17 04:54:35 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 04:54:43 [INFO] Prompt used:
+            
+<dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Apa pengeluaran terbesar saya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-17 04:54:43 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+df = dfs[0]
+largest_expense = df.loc[df['Nominal'] == df['Nominal'].max()]
+
+# Declare result var: 
+result = {
+    "type": "dataframe",
+    "value": largest_expense
+}
+            ```
+            
+2025-01-17 04:54:43 [INFO] Executing Step 4: CachePopulation
+2025-01-17 04:54:43 [INFO] Executing Step 5: CodeCleaning
+2025-01-17 04:54:43 [INFO] 
+Code running:
+```
+df = dfs[0]
+largest_expense = df.loc[df['Nominal'] == df['Nominal'].max()]
+result = {'type': 'dataframe', 'value': largest_expense}
+        ```
+2025-01-17 04:54:43 [INFO] Executing Step 6: CodeExecution
+2025-01-17 04:54:43 [INFO] Executing Step 7: ResultValidation
+2025-01-17 04:54:43 [INFO] Answer: {'type': 'dataframe', 'value':        Tanggal  Nominal        Kategori   Keterangan
+1   2025-01-07  1500000  Foods & Drinks  restaurants
+10  2024-12-28  1500000  Foods & Drinks  restaurants
+11  2025-01-01  1500000  Foods & Drinks  restaurants
+15  2024-12-24  1500000  Foods & Drinks  restaurants}
+2025-01-17 04:54:43 [INFO] Executing Step 8: ResultParsing
+2025-01-17 04:55:55 [INFO] Question: apa kategori pengeluaran paling besar saya?
+2025-01-17 04:55:55 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-17 04:55:55 [INFO] Prompt ID: d812478a-6dc3-42da-8a61-fa7a42939367
+2025-01-17 04:55:55 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-17 04:55:55 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-17 04:55:55 [INFO] Executing Step 1: CacheLookup
+2025-01-17 04:55:55 [INFO] Executing Step 2: PromptGeneration
+2025-01-17 04:55:55 [INFO] Using prompt: <dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-17 04:55:55 [INFO] Executing Step 3: CodeGenerator
+2025-01-17 04:55:57 [INFO] Prompt used:
+            
+
+### PREVIOUS CONVERSATION
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+<dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-17 04:55:57 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+df = dfs[0]
+kategori_terbesar = df.groupby('Kategori')['Nominal'].sum().idxmax()
+
+# Declare result var: 
+result = {"type": "string", "value": f"Kategori pengeluaran terbesar Anda adalah {kategori_terbesar}."}
+            ```
+            
+2025-01-17 04:55:58 [INFO] Executing Step 4: CachePopulation
+2025-01-17 04:55:58 [INFO] Executing Step 5: CodeCleaning
+2025-01-17 04:55:58 [INFO] 
+Code running:
+```
+df = dfs[0]
+kategori_terbesar = df.groupby('Kategori')['Nominal'].sum().idxmax()
+result = {'type': 'string', 'value': f'Kategori pengeluaran terbesar Anda adalah {kategori_terbesar}.'}
+        ```
+2025-01-17 04:55:58 [INFO] Executing Step 6: CodeExecution
+2025-01-17 04:55:58 [INFO] Executing Step 7: ResultValidation
+2025-01-17 04:55:58 [INFO] Answer: {'type': 'string', 'value': 'Kategori pengeluaran terbesar Anda adalah Foods & Drinks.'}
+2025-01-17 04:55:58 [INFO] Executing Step 8: ResultParsing
+2025-01-17 04:56:10 [INFO] Question: apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+2025-01-17 04:56:10 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-17 04:56:10 [INFO] Prompt ID: 3436bcee-d21b-497d-b9ac-bf08f5fa547f
+2025-01-17 04:56:10 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-17 04:56:10 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-17 04:56:11 [INFO] Executing Step 1: CacheLookup
+2025-01-17 04:56:11 [INFO] Executing Step 2: PromptGeneration
+2025-01-17 04:56:11 [INFO] Using prompt: <dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-17 04:56:11 [INFO] Executing Step 3: CodeGenerator
+2025-01-17 04:56:14 [INFO] Prompt used:
+            
+
+### PREVIOUS CONVERSATION
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks.
+<dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-17 04:56:14 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+df = dfs[0]
+kategori_pengeluaran = df.groupby('Kategori')['Nominal'].sum().reset_index()
+kategori_terbesar = kategori_pengeluaran.sort_values('Nominal', ascending=False).iloc[0]
+kategori = kategori_terbesar['Kategori']
+jumlah = kategori_terbesar['Nominal']
+
+# Declare result var: 
+result = {
+    "type": "string",
+    "value": f"Kategori pengeluaran terbesar Anda adalah {kategori} dengan jumlah Rp{jumlah:,}."
+}
+            ```
+            
+2025-01-17 04:56:14 [INFO] Executing Step 4: CachePopulation
+2025-01-17 04:56:14 [INFO] Executing Step 5: CodeCleaning
+2025-01-17 04:56:14 [INFO] 
+Code running:
+```
+df = dfs[0]
+kategori_pengeluaran = df.groupby('Kategori')['Nominal'].sum().reset_index()
+kategori_terbesar = kategori_pengeluaran.sort_values('Nominal', ascending=False).iloc[0]
+kategori = kategori_terbesar['Kategori']
+jumlah = kategori_terbesar['Nominal']
+result = {'type': 'string', 'value': f'Kategori pengeluaran terbesar Anda adalah {kategori} dengan jumlah Rp{jumlah:,}.'}
+        ```
+2025-01-17 04:56:14 [INFO] Executing Step 6: CodeExecution
+2025-01-17 04:56:14 [INFO] Executing Step 7: ResultValidation
+2025-01-17 04:56:14 [INFO] Answer: {'type': 'string', 'value': 'Kategori pengeluaran terbesar Anda adalah Foods & Drinks dengan jumlah Rp6,000,000.'}
+2025-01-17 04:56:14 [INFO] Executing Step 8: ResultParsing
+2025-01-17 04:58:49 [INFO] Question: Visualisasi pengeluaran berdasarkan kagegori
+2025-01-17 04:58:49 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-17 04:58:49 [INFO] Prompt ID: c22f1a89-713c-4984-ae5a-08ac9d60ebcd
+2025-01-17 04:58:49 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-17 04:58:49 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-17 04:58:49 [INFO] Executing Step 1: CacheLookup
+2025-01-17 04:58:49 [INFO] Executing Step 2: PromptGeneration
+2025-01-17 04:58:49 [INFO] Using prompt: <dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran berdasarkan kagegori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-17 04:58:49 [INFO] Executing Step 3: CodeGenerator
+2025-01-17 04:58:54 [INFO] Prompt used:
+            
+
+### PREVIOUS CONVERSATION
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks.
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks dengan jumlah Rp6,000,000.
+<dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran berdasarkan kagegori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-17 04:58:54 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-17 04:58:54 [INFO] Executing Step 4: CachePopulation
+2025-01-17 04:58:54 [INFO] Executing Step 5: CodeCleaning
+2025-01-17 04:58:54 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-17 04:58:54 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-17 04:58:54 [INFO] Executing Step 6: CodeExecution
+2025-01-17 04:58:54 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-17 04:58:54 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-17 04:58:54 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-17 04:58:54 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-17 04:58:54 [INFO] Using prompt: <dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks.
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks dengan jumlah Rp6,000,000.
+### QUERY
+ Visualisasi pengeluaran berdasarkan kagegori
+
+You generated this python code:
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-17 04:58:54 [INFO] Executing Step 1: CodeGenerator
+2025-01-17 04:59:00 [INFO] Prompt used:
+            
+
+### PREVIOUS CONVERSATION
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks.
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks dengan jumlah Rp6,000,000.
+<dataframe>
+dfs[0]:30x4
+Tanggal,Nominal,Kategori,Keterangan
+2025-01-16,1500000,Topup,cable tv
+2024-12-28,200000,Bills,miscellaneous
+2025-01-11,300000,Social Events,Fashion
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Apa pengeluaran terbesar saya?
+### ANSWER
+ Check it out: <dataframe>
+### QUERY
+ apa kategori pengeluaran paling besar saya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks.
+### QUERY
+ apa kategori pengeluaran paling besar saya? dan berapa jumlahnya?
+### ANSWER
+ Kategori pengeluaran terbesar Anda adalah Foods & Drinks dengan jumlah Rp6,000,000.
+### QUERY
+ Visualisasi pengeluaran berdasarkan kagegori
+
+You generated this python code:
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-17 04:59:00 [INFO] Code generated:
+            ```
+            import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+# plt.tight_layout() <-- This line is causing the error, remove it
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-17 04:59:00 [INFO] Executing Step 2: CodeCleaning
+2025-01-17 04:59:00 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-17 04:59:00 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['Tanggal'] = pd.to_datetime(df['Tanggal'])
+df['Bulan'] = df['Tanggal'].dt.strftime('%Y-%m')
+pengeluaran_per_kategori = df.groupby('Kategori')['Nominal'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.bar(pengeluaran_per_kategori['Kategori'], pengeluaran_per_kategori['Nominal'])
+plt.xlabel('Kategori')
+plt.ylabel('Total Pengeluaran')
+plt.title('Visualisasi Pengeluaran Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-17 04:59:01 [INFO] Executing Step 7: ResultValidation
+2025-01-17 04:59:01 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-17 04:59:01 [INFO] Executing Step 8: ResultParsing
+2025-01-17 05:11:56 [INFO] Question: Visualisasi pengeluaran berdasarkan kategori
+2025-01-17 05:11:56 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-17 05:11:57 [INFO] Prompt ID: 43842cb1-5ce6-4831-998e-3535f3868ce5
+2025-01-17 05:11:57 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-17 05:11:57 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-17 05:11:57 [INFO] Executing Step 1: CacheLookup
+2025-01-17 05:11:57 [INFO] Executing Step 2: PromptGeneration
+2025-01-17 05:11:57 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+10,2025-01-08,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran berdasarkan kategori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-17 05:11:57 [INFO] Executing Step 3: CodeGenerator
+2025-01-17 05:11:57 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 05:12:06 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+10,2025-01-08,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran berdasarkan kategori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-17 05:12:06 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-17 05:12:06 [INFO] Executing Step 4: CachePopulation
+2025-01-17 05:12:06 [INFO] Executing Step 5: CodeCleaning
+2025-01-17 05:12:06 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-17 05:12:06 [INFO] 
+Code running:
+```
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-17 05:12:06 [INFO] Executing Step 6: CodeExecution
+2025-01-17 05:12:06 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-17 05:12:06 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-17 05:12:06 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-17 05:12:06 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-17 05:12:06 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+10,2025-01-08,1000000.0,cable tv,Bills
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Visualisasi pengeluaran berdasarkan kategori
+
+You generated this python code:
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-17 05:12:06 [INFO] Executing Step 1: CodeGenerator
+2025-01-17 05:12:11 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+10,2025-01-08,1000000.0,cable tv,Bills
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Visualisasi pengeluaran berdasarkan kategori
+
+You generated this python code:
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-17 05:12:12 [INFO] Code generated:
+            ```
+            import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-17 05:12:12 [INFO] Executing Step 2: CodeCleaning
+2025-01-17 05:12:12 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-17 05:12:12 [INFO] 
+Code running:
+```
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-17 05:12:12 [INFO] Executing Step 7: ResultValidation
+2025-01-17 05:12:12 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-17 05:12:12 [INFO] Executing Step 8: ResultParsing
+2025-01-17 07:10:50 [ERROR] AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x7abb6bad3820>" raised exception!
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 186, in __call__
+    response = self.session.request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/grpc/_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/credentials.py", line 409, in refresh
+    ) = reauth.refresh_grant(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/reauth.py", line 333, in refresh_grant
+    response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/_client.py", line 192, in _token_endpoint_request_no_throw
+    response = request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 192, in __call__
+    raise new_exc from caught_exc
+google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-01-17 07:10:50 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 Getting metadata from plugin failed with error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')).
+2025-01-17 07:16:19 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 07:22:25 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 07:22:31 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 07:26:20 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 07:31:47 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 07:40:33 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 08:08:27 [ERROR] AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x7abb6bad3820>" raised exception!
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 186, in __call__
+    response = self.session.request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/grpc/_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/credentials.py", line 409, in refresh
+    ) = reauth.refresh_grant(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/reauth.py", line 333, in refresh_grant
+    response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/_client.py", line 192, in _token_endpoint_request_no_throw
+    response = request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 192, in __call__
+    raise new_exc from caught_exc
+google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-01-17 08:08:27 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 Getting metadata from plugin failed with error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')).
+2025-01-17 08:08:31 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 08:08:38 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:08:38 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:08:38 [ERROR] AuthMetadataPluginCallback "<google.auth.transport.grpc.AuthMetadataPlugin object at 0x7abb68204790>" raised exception!
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/util/util.py", line 38, in reraise
+    raise value.with_traceback(tb)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connectionpool.py", line 534, in _make_request
+    response = conn.getresponse()
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/urllib3/connection.py", line 516, in getresponse
+    httplib_response = super().getresponse()
+  File "/usr/lib/python3.10/http/client.py", line 1375, in getresponse
+    response.begin()
+  File "/usr/lib/python3.10/http/client.py", line 318, in begin
+    version, status, reason = self._read_status()
+  File "/usr/lib/python3.10/http/client.py", line 287, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+urllib3.exceptions.ProtocolError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 186, in __call__
+    response = self.session.request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/requests/adapters.py", line 682, in send
+    raise ConnectionError(err, request=request)
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/grpc/_plugin_wrapping.py", line 105, in __call__
+    self._metadata_plugin(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 95, in __call__
+    callback(self._get_authorization_headers(context), None)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/grpc.py", line 81, in _get_authorization_headers
+    self._credentials.before_request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 239, in before_request
+    self._blocking_refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/credentials.py", line 202, in _blocking_refresh
+    self.refresh(request)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/credentials.py", line 409, in refresh
+    ) = reauth.refresh_grant(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/reauth.py", line 333, in refresh_grant
+    response_status_ok, response_data, retryable_error = _client._token_endpoint_request_no_throw(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/oauth2/_client.py", line 192, in _token_endpoint_request_no_throw
+    response = request(
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/google/auth/transport/requests.py", line 192, in __call__
+    raise new_exc from caught_exc
+google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+2025-01-17 08:08:38 [WARNING] Retrying vertexai.language_models._language_models._TextEmbeddingModel.get_embeddings in 4.0 seconds as it raised ServiceUnavailable: 503 Getting metadata from plugin failed with error: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response')).
+2025-01-17 08:08:43 [WARNING] Retrying vertexai.language_models._language_models._TextEmbeddingModel.get_embeddings in 4.0 seconds as it raised ServiceUnavailable: 503 recvmsg:Connection reset by peer.
+2025-01-17 08:09:47 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:09:47 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:10:03 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:10:03 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:11:06 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:11:06 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:12:31 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:12:31 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:13:21 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:13:21 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:14:08 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:14:08 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:17:48 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:18:11 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:19:43 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:20:17 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:23:54 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:25:22 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-17 08:25:22 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
