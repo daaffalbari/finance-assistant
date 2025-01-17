@@ -43,6 +43,16 @@ llm = ChatVertexAI(
 )
 
 
+def save_file(uploaded_file, upload_dir):  
+    if uploaded_file is not None:  
+        file_path = os.path.join(upload_dir, uploaded_file.name)  
+        with open(file_path, 'wb') as f:  
+            f.write(uploaded_file.getbuffer())  
+        return file_path  
+    return None  
+
+
+
 def extract_receipt(file_path):
     loader = PyPDFLoader(file_path)
     docs = loader.load()
@@ -118,9 +128,6 @@ def export_transaction_clean_to_db(transaction_clean):
     )
     """)
     conn.commit()
-    conn.close()
-
-    conn = sqlite3.connect("data/finance.db")
     
     transactions_df['date'] = pd.to_datetime(transactions_df['date'], errors='coerce')
     transactions_df = transactions_df.dropna(subset=['date']) 
