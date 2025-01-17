@@ -24,6 +24,12 @@ import os
 import pandas as pd
 import sqlite3
 import datetime
+from pydantic import BaseModel
+
+
+class FilePaths(BaseModel):
+    transaction_file_path: str
+    shopping_list_path: str
 
 _ = load_dotenv()
 
@@ -41,17 +47,6 @@ llm = ChatVertexAI(
     model="gemini-1.5-pro-001",
     temperature=0,
 )
-
-
-def save_file(uploaded_file, upload_dir):  
-    if uploaded_file is not None:  
-        file_path = os.path.join(upload_dir, uploaded_file.name)  
-        with open(file_path, 'wb') as f:  
-            f.write(uploaded_file.getbuffer())  
-        return file_path  
-    return None  
-
-
 
 def extract_receipt(file_path):
     loader = PyPDFLoader(file_path)
@@ -79,7 +74,6 @@ def transaction_parser(transaction_file):
 
     conn = sqlite3.connect("data/finance.db")
     df = pd.read_sql_query("SELECT budget, rules FROM budget_categories", conn)
-    conn.close()
 
     template_prompt = """
     Your task is to check the transactions have a categories or not. If the transaction dont have a category, you can assign a category to the transaction.
@@ -112,11 +106,6 @@ def transaction_parser(transaction_file):
 
     transaction_clean = pd.DataFrame(response)
 
-    return transaction_clean
-
-
-def export_transaction_clean_to_db(transaction_clean):
-    conn = sqlite3.connect("data/finance.db")
     cursor = conn.cursor()
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS transactions (
@@ -127,17 +116,16 @@ def export_transaction_clean_to_db(transaction_clean):
         category TEXT
     )
     """)
-    conn.commit()
-    
-    transactions_df['date'] = pd.to_datetime(transactions_df['date'], errors='coerce')
-    transactions_df = transactions_df.dropna(subset=['date']) 
-    transactions_df['date'] = transactions_df['date'].dt.strftime('%Y-%m-%d')  
-    
-    transactions_df.to_sql('transactions', 
-                          conn, 
-                          if_exists='append', 
-                          index=False)
 
+    transaction_clean['date'] = pd.to_datetime(transaction_clean['date'], errors='coerce')
+    transaction_clean = transaction_clean.dropna(subset=['date'])
+    transaction_clean['date'] = transaction_clean['date'].dt.strftime('%Y-%m-%d')
+
+    transaction_clean.to_sql('transactions',
+                            conn,
+                            if_exists='append',
+                            index=False)
+    
     return 'Data has been exported to database'
 
 
@@ -149,6 +137,29 @@ def read_root():
     return {
         'message': 'Hello World'
     }
+
+
+@app.post('/process_file')
+async def process_file(files: FilePaths):
+    try:
+        transaction_file_path = files.transaction_file_path
+        shopping_list_path = files.shopping_list_path
+
+        if not os.path.exists(transaction_file_path):
+            raise HTTPException(status_code=400, detail="Transaction file not found")
+        if not os.path.exists(shopping_list_path):
+            raise HTTPException(status_code=400, detail="Shopping list file not found")
+        
+        reciept_retriever = extract_receipt(shopping_list_path)
+        transaction_parser(transaction_file_path)
+
+        return {
+            'transaction_file_path': 'Data has been exported to database',
+            'shopping_list_path': 'Shopping list has been extracted'
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
 
 @app.get('/chat')
 async def chat():

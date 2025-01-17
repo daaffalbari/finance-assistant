@@ -44,15 +44,24 @@ def save_file(uploaded_file, upload_dir):
 
 if transaction_file:
     transaction_path = save_file(transaction_file, UPLOAD_DIR)
-else:
-    st.write("No transaction file uploaded.")
 
 if shopping_list:  
     shopping_list_path = save_file(shopping_list, UPLOAD_DIR)
 
-else:
-    st.write("No shopping list uploaded.")
 
+if transaction_path and shopping_list_path:
+    api_url = 'http://localhost:8000/process_file'
+    payload = {
+        'transaction_path': transaction_path,
+        'shopping_list_path': shopping_list_path
+    }
+
+    response = requests.post(api_url, json=payload)
+
+    if response.status_code == 200:
+        st.success('Data has been processed successfully')
+    else:
+        st.error(f'Error: {response.json()}')
 
 
 if "messages" not in st.session_state:
