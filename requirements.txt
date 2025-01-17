@@ -8,3 +8,5 @@ langchain-google-genai
 langchain-google-vertexai
 langchain-chroma
 pandasai
+streamlit
+fastapi
