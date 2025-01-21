@@ -11,9 +11,6 @@ from langchain_chroma import Chroma
 from langchain_community.utilities import SQLDatabase
 from langchain_community.document_loaders import PyPDFLoader
 from langchain import hub
-from langchain.utilities import SQLDatabase
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
 from langchain.agents.agent_types import AgentType
 
 from langchain_core.tools.retriever import create_retriever_tool
@@ -23,7 +20,6 @@ import vertexai
 import os
 import pandas as pd
 import sqlite3
-import datetime
 from pydantic import BaseModel
 
 
@@ -31,24 +27,27 @@ class FilePaths(BaseModel):
     transaction_file_path: str
     shopping_list_path: str
 
+
 _ = load_dotenv()
 
 PROJECT_ID = os.getenv("PROJECT_ID")
 LOCATION = os.getenv("LOCATION")
-
-vertexai.init(project=PROJECT_ID, location=LOCATION)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 LANGCHAIN_TRACING_V2= os.getenv('LANGCHAIN_TRACING_V2')
 LANGCHAIN_ENDPOINT= os.getenv('LANGCHAIN_ENDPOINT')
 LANGCHAIN_API_KEY= os.getenv('LANGCHAIN_API_KEY')
 LANGCHAIN_PROJECT= os.getenv('LANGCHAIN_PROJECT')
 
+
+vertexai.init(project=PROJECT_ID, location=LOCATION)
+
 llm = ChatVertexAI(
     model="gemini-1.5-pro-001",
     temperature=0,
 )
 
-def extract_receipt(file_path):
+def receipt_embedding(file_path):
     loader = PyPDFLoader(file_path)
     docs = loader.load()
 
@@ -72,7 +71,7 @@ def transaction_parser(transaction_file):
     docs = pd.read_csv(transaction_file)
     docs.to_string()
 
-    conn = sqlite3.connect("data/finance.db")
+    conn = sqlite3.connect(DATABASE_URL)
     df = pd.read_sql_query("SELECT budget, rules FROM budget_categories", conn)
 
     template_prompt = """
@@ -129,6 +128,11 @@ def transaction_parser(transaction_file):
     return 'Data has been exported to database'
 
 
+
+
+
+
+
 app = FastAPI()
 
 
@@ -150,7 +154,7 @@ async def process_file(files: FilePaths):
         if not os.path.exists(shopping_list_path):
             raise HTTPException(status_code=400, detail="Shopping list file not found")
         
-        reciept_retriever = extract_receipt(shopping_list_path)
+        reciept_retriever = receipt_embedding(shopping_list_path)
         transaction_parser(transaction_file_path)
 
         return {
@@ -163,6 +167,7 @@ async def process_file(files: FilePaths):
 
 @app.get('/chat')
 async def chat():
+
     return {
         'message': 'Chat'
     }

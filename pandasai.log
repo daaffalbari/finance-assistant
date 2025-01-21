@@ -1277,3 +1277,3217 @@ google.auth.exceptions.TransportError: ('Connection aborted.', RemoteDisconnecte
 2025-01-17 08:23:54 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
 2025-01-17 08:25:22 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
 2025-01-17 08:25:22 [WARNING] This model can reply with multiple function calls in one response. Please don't rely on `additional_kwargs.function_call` as only the last one will be saved.Use `tool_calls` instead.
+2025-01-19 11:31:14 [INFO] Question: dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+2025-01-19 11:31:14 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:31:14 [INFO] Prompt ID: 10858ac0-b823-4b73-beb9-524e54d7c54f
+2025-01-19 11:31:14 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:31:14 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:31:14 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:31:14 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:31:15 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:31:15 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:31:19 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:31:19 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+
+plt.figure(figsize=(10, 5))
+plt.plot(food.index, food['amount'])
+plt.xlabel('Date')
+plt.ylabel('Total Amount')
+plt.title('Food Expenses Over Time')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:31:19 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:31:19 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:31:19 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:31:19 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+plt.figure(figsize=(10, 5))
+plt.plot(food.index, food['amount'])
+plt.xlabel('Date')
+plt.ylabel('Total Amount')
+plt.title('Food Expenses Over Time')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:31:19 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:31:19 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+2025-01-19 11:31:19 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:31:19 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:31:20 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:31:20 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+plt.figure(figsize=(10, 5))
+plt.plot(food.index, food['amount'])
+plt.xlabel('Date')
+plt.ylabel('Total Amount')
+plt.title('Food Expenses Over Time')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:31:20 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:31:26 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+plt.figure(figsize=(10, 5))
+plt.plot(food.index, food['amount'])
+plt.xlabel('Date')
+plt.ylabel('Total Amount')
+plt.title('Food Expenses Over Time')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:31:26 [INFO] Code generated:
+            ```
+            import pandas as pd
+import matplotlib.pyplot as plt
+
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+# Group by month and sum
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:31:26 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:31:26 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:31:26 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:31:26 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+2025-01-19 11:31:26 [WARNING] Failed to execute code retrying with a correction framework [retry number: 2]
+2025-01-19 11:31:26 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:31:26 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:31:26 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:31:26 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:31:32 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.groupby(pd.Grouper(key='date', freq='M')).sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 4, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_pandas.py", line 109, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedPandas")
+AttributeError: 'Grouper' is not allowed in RestrictedPandas
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:31:32 [INFO] Code generated:
+            ```
+            import pandas as pd
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:31:32 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:31:32 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:31:32 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:31:32 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 97, in execute
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Value type <class 'str'> must match with type text
+
+2025-01-19 11:31:32 [WARNING] Failed to execute code retrying with a correction framework [retry number: 3]
+2025-01-19 11:31:32 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:31:32 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:31:32 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 97, in execute
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Value type <class 'str'> must match with type text
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:31:32 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:31:37 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+30,2024-12-28,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi untuk kategori makanan di transaksi saya
+
+You generated this python code:
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 97, in execute
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Value type <class 'str'> must match with type text
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:31:37 [INFO] Code generated:
+            ```
+            df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'Done'}
+            ```
+            
+2025-01-19 11:31:37 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:31:37 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:31:38 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food = df[df['category'] == 'Food']
+food = food.set_index('date')
+food = food.resample('M').sum()
+if food.empty:
+    result = {'type': 'text', 'value': 'There is no data for food category.'}
+else:
+    plt.figure(figsize=(10, 5))
+    plt.plot(food.index, food['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': 'Done'}
+        ```
+2025-01-19 11:31:38 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 97, in execute
+    raise InvalidOutputValueMismatch(
+pandasai.exceptions.InvalidOutputValueMismatch: Value type <class 'str'> must match with type text
+
+2025-01-19 11:31:38 [ERROR] Pipeline failed on step 6: Value type <class 'str'> must match with type text
+2025-01-19 11:32:40 [INFO] Question: Visualisasikan kategori makanan dari data transaksi saya
+2025-01-19 11:32:40 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:32:40 [INFO] Prompt ID: 7f196d36-1463-4e9e-8468-7a6c598d32ac
+2025-01-19 11:32:40 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:32:40 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:32:40 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:32:40 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:32:41 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+23,2024-12-23,300000.0,miscellaneous,Others
+9,2025-01-16,400000.0,weddings,Social Events
+29,2025-01-16,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasikan kategori makanan dari data transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:32:41 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:32:50 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+23,2024-12-23,300000.0,miscellaneous,Others
+9,2025-01-16,400000.0,weddings,Social Events
+29,2025-01-16,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasikan kategori makanan dari data transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:32:50 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+
+# Filter data by category 'Food'
+food_df = df[df['category'] == 'Food']
+
+# Check if there is any data in food_df
+if food_df.empty:
+  result = {
+    "type": "string",
+    "value": "Tidak ada data transaksi makanan."
+  }
+else:
+  # Group by date and sum the amounts
+  food_by_date = food_df.groupby(df['date'].dt.strftime('%Y-%m')).sum()
+
+  # Create the bar chart
+  plt.figure(figsize=(10, 5))
+  plt.bar(food_by_date.index, food_by_date['amount'])
+  plt.xlabel('Date')
+  plt.ylabel('Total Amount')
+  plt.title('Food Expenses Over Time')
+  plt.xticks(rotation=45)
+  plt.tight_layout()
+  plt.savefig('temp_chart.png')
+
+  result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+  }
+
+# Declare result var: 
+# type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+            ```
+            
+2025-01-19 11:32:50 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:32:50 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:32:50 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:32:50 [INFO] 
+Code running:
+```
+df = dfs[0]
+df['date'] = pd.to_datetime(df['date'])
+food_df = df[df['category'] == 'Food']
+if food_df.empty:
+    result = {'type': 'string', 'value': 'Tidak ada data transaksi makanan.'}
+else:
+    food_by_date = food_df.groupby(df['date'].dt.strftime('%Y-%m')).sum()
+    plt.figure(figsize=(10, 5))
+    plt.bar(food_by_date.index, food_by_date['amount'])
+    plt.xlabel('Date')
+    plt.ylabel('Total Amount')
+    plt.title('Food Expenses Over Time')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+    result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:32:50 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:32:50 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:32:50 [INFO] Answer: {'type': 'string', 'value': 'Tidak ada data transaksi makanan.'}
+2025-01-19 11:32:50 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:33:28 [INFO] Question: Dapatkan memberikan visualisasi data kategori makanan?
+2025-01-19 11:33:28 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:33:28 [INFO] Prompt ID: eae86eca-9689-4756-894d-f564cbe8f1fd
+2025-01-19 11:33:28 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:33:28 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:33:28 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:33:28 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:33:28 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+11,2024-12-28,1500000.0,restaurants,Foods & Drinks
+2,2025-01-07,1500000.0,restaurants,Foods & Drinks
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Dapatkan memberikan visualisasi data kategori makanan?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:33:28 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:33:32 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+11,2024-12-28,1500000.0,restaurants,Foods & Drinks
+2,2025-01-07,1500000.0,restaurants,Foods & Drinks
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Dapatkan memberikan visualisasi data kategori makanan?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:33:32 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Category')
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:33:32 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:33:32 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:33:32 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:33:32 [INFO] 
+Code running:
+```
+df = dfs[0]
+df_grouped = df.groupby('category')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(df_grouped['category'], df_grouped['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Total Amount by Category')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:33:32 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:33:32 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:33:33 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:33:33 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:34:08 [INFO] Question: {"transactions": TransactionData(__arg1='All transaction data')}
+2025-01-19 11:34:08 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:34:08 [INFO] Prompt ID: cf5750e9-7053-404a-9cc2-65e7c004cb52
+2025-01-19 11:34:08 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:34:08 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:34:08 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:34:08 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:34:08 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+25,2025-01-11,500000.0,Gasoline,Transportation
+21,2024-12-27,200000.0,Brizzi BRI,Topup
+29,2025-01-16,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All transaction data')}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:34:08 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:34:10 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+25,2025-01-11,500000.0,Gasoline,Transportation
+21,2024-12-27,200000.0,Brizzi BRI,Topup
+29,2025-01-16,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All transaction data')}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:34:10 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+transactions = dfs[0]
+
+# Declare result var: 
+result = {
+ "type": "dataframe",
+ "value": transactions
+}
+            ```
+            
+2025-01-19 11:34:10 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:34:10 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:34:10 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+result = {'type': 'dataframe', 'value': transactions}
+        ```
+2025-01-19 11:34:10 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:34:10 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:34:10 [INFO] Answer: {'type': 'dataframe', 'value':     id        date     amount    description        category
+0    1  2025-01-11   300000.0         movies   Entertainment
+1    2  2025-01-07  1500000.0    restaurants  Foods & Drinks
+2    3  2025-01-03   200000.0     Brizzi BRI           Topup
+3    4  2025-01-14  1000000.0       cable tv           Bills
+4    5  2025-01-11   500000.0        tuition       Education
+5    6  2025-01-12   200000.0     Brizzi BRI           Topup
+6    7  2024-12-21   300000.0  miscellaneous          Others
+7    8  2025-01-10  1000000.0       cable tv           Bills
+8    9  2025-01-16   400000.0       weddings   Social Events
+9   10  2025-01-08  1000000.0       cable tv           Bills
+10  11  2024-12-28  1500000.0    restaurants  Foods & Drinks
+11  12  2025-01-01  1500000.0    restaurants  Foods & Drinks
+12  13  2024-12-21   500000.0        tuition       Education
+13  14  2025-01-06   500000.0       Gasoline  Transportation
+14  15  2024-12-17   500000.0       Gasoline  Transportation
+15  16  2024-12-24  1500000.0    restaurants  Foods & Drinks
+16  17  2025-01-07   700000.0        Fashion        Shopping
+17  18  2025-01-12   400000.0       weddings   Social Events
+18  19  2025-01-14   300000.0  miscellaneous          Others
+19  20  2024-12-28   700000.0        Fashion        Shopping
+20  21  2024-12-27   200000.0     Brizzi BRI           Topup
+21  22  2025-01-05   500000.0        tuition       Education
+22  23  2024-12-23   300000.0  miscellaneous          Others
+23  24  2024-12-26   200000.0     Brizzi BRI           Topup
+24  25  2025-01-11   500000.0       Gasoline  Transportation
+25  26  2024-12-19   300000.0         movies   Entertainment
+26  27  2025-01-05   500000.0       Gasoline  Transportation
+27  28  2024-12-17   200000.0     Brizzi BRI           Topup
+28  29  2025-01-16  1000000.0       cable tv           Bills
+29  30  2024-12-28   300000.0  miscellaneous          Others}
+2025-01-19 11:34:10 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:34:28 [INFO] Question: {"transactions": TransactionData(__arg1='All transaction'), "category": "Bills"}
+2025-01-19 11:34:28 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:34:28 [INFO] Prompt ID: d8342fd7-18ed-4c9b-b824-41b5c37aea61
+2025-01-19 11:34:28 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:34:28 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:34:28 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:34:28 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:34:28 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All transaction'), "category": "Bills"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:34:28 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:34:33 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All transaction'), "category": "Bills"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:34:33 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+filtered_transactions = transactions[transactions['category'] == 'Bills']
+result = {
+    "type": "dataframe",
+    "value": filtered_transactions
+}
+
+# Declare result var: 
+# type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+            ```
+            
+2025-01-19 11:34:33 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:34:33 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:34:33 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:34:33 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+filtered_transactions = transactions[transactions['category'] == 'Bills']
+result = {'type': 'dataframe', 'value': filtered_transactions}
+        ```
+2025-01-19 11:34:33 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:34:33 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:34:33 [INFO] Answer: {'type': 'dataframe', 'value':     id       date     amount description category
+3    4 2025-01-14  1000000.0    cable tv    Bills
+7    8 2025-01-10  1000000.0    cable tv    Bills
+9   10 2025-01-08  1000000.0    cable tv    Bills
+28  29 2025-01-16  1000000.0    cable tv    Bills}
+2025-01-19 11:34:33 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:34:55 [INFO] Question: {"transactions": TransactionData(__arg1='All you transaction data'), "category": "Bills"}
+2025-01-19 11:34:55 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:34:55 [INFO] Prompt ID: ea25c3d4-2971-4604-ab7d-aa7daf0b25e0
+2025-01-19 11:34:55 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:34:55 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:34:55 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:34:55 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:34:55 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+9,2025-01-16,400000.0,weddings,Social Events
+21,2024-12-27,200000.0,Brizzi BRI,Topup
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All you transaction data'), "category": "Bills"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:34:55 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:34:59 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+9,2025-01-16,400000.0,weddings,Social Events
+21,2024-12-27,200000.0,Brizzi BRI,Topup
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"transactions": TransactionData(__arg1='All you transaction data'), "category": "Bills"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:34:59 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+transactions_filter = transactions[transactions['category'] == 'Bills']
+transactions_filter = transactions_filter.groupby('date').sum().reset_index()
+fig, ax = plt.subplots(figsize=(16, 9))
+ax.bar(transactions_filter['date'], transactions_filter['amount'])
+plt.xticks(rotation=45)
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:34:59 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:34:59 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:34:59 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:35:00 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions_filter = transactions[transactions['category'] == 'Bills']
+transactions_filter = transactions_filter.groupby('date').sum().reset_index()
+fig, ax = plt.subplots(figsize=(16, 9))
+ax.bar(transactions_filter['date'], transactions_filter['amount'])
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:35:00 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:35:00 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:35:00 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:35:00 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:35:00 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:35:00 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:36:13 [INFO] Question: dapatkah anda menampilkan visualisasi pengeluaran terbesar saya
+2025-01-19 11:36:13 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:36:13 [INFO] Prompt ID: eb5d743d-94cd-4201-8550-436b6f8a8b30
+2025-01-19 11:36:13 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:36:13 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:36:13 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:36:13 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:36:13 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+15,2024-12-17,500000.0,Gasoline,Transportation
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda menampilkan visualisasi pengeluaran terbesar saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:36:13 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:36:19 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+15,2024-12-17,500000.0,Gasoline,Transportation
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda menampilkan visualisasi pengeluaran terbesar saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:36:19 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+transactions["date"] = pd.to_datetime(transactions["date"])
+transactions["month_year"] = transactions["date"].dt.strftime("%Y-%m")
+
+monthly_expenses = transactions.groupby("month_year")["amount"].sum().reset_index()
+
+max_expense_month = monthly_expenses.loc[monthly_expenses["amount"].idxmax()]["month_year"]
+max_expense_amount = monthly_expenses.loc[monthly_expenses["amount"].idxmax()]["amount"]
+
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses["month_year"], monthly_expenses["amount"])
+plt.xlabel("Month")
+plt.ylabel("Total Expenses")
+plt.title("Monthly Expenses")
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig("temp_chart.png")
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:36:19 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:36:19 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:36:19 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:36:19 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.strftime('%Y-%m')
+monthly_expenses = transactions.groupby('month_year')['amount'].sum().reset_index()
+max_expense_month = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['month_year']
+max_expense_amount = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['amount']
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses['month_year'], monthly_expenses['amount'])
+plt.xlabel('Month')
+plt.ylabel('Total Expenses')
+plt.title('Monthly Expenses')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:36:19 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:36:19 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:36:19 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:36:19 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 13, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:36:19 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:36:19 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:36:19 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:36:19 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+15,2024-12-17,500000.0,Gasoline,Transportation
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda menampilkan visualisasi pengeluaran terbesar saya
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.strftime('%Y-%m')
+monthly_expenses = transactions.groupby('month_year')['amount'].sum().reset_index()
+max_expense_month = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['month_year']
+max_expense_amount = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['amount']
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses['month_year'], monthly_expenses['amount'])
+plt.xlabel('Month')
+plt.ylabel('Total Expenses')
+plt.title('Monthly Expenses')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 13, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:36:19 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:36:25 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+15,2024-12-17,500000.0,Gasoline,Transportation
+6,2025-01-12,200000.0,Brizzi BRI,Topup
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda menampilkan visualisasi pengeluaran terbesar saya
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.strftime('%Y-%m')
+monthly_expenses = transactions.groupby('month_year')['amount'].sum().reset_index()
+max_expense_month = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['month_year']
+max_expense_amount = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['amount']
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses['month_year'], monthly_expenses['amount'])
+plt.xlabel('Month')
+plt.ylabel('Total Expenses')
+plt.title('Monthly Expenses')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 13, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:36:25 [INFO] Code generated:
+            ```
+            transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.strftime('%Y-%m')
+monthly_expenses = transactions.groupby('month_year')['amount'].sum().reset_index()
+max_expense_month = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['month_year']
+max_expense_amount = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['amount']
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses['month_year'], monthly_expenses['amount'])
+plt.xlabel('Month')
+plt.ylabel('Total Expenses')
+plt.title('Monthly Expenses')
+plt.xticks(rotation=45)
+# plt.tight_layout() # Removed restricted function
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:36:25 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:36:25 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:36:25 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.strftime('%Y-%m')
+monthly_expenses = transactions.groupby('month_year')['amount'].sum().reset_index()
+max_expense_month = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['month_year']
+max_expense_amount = monthly_expenses.loc[monthly_expenses['amount'].idxmax()]['amount']
+plt.figure(figsize=(10, 6))
+plt.bar(monthly_expenses['month_year'], monthly_expenses['amount'])
+plt.xlabel('Month')
+plt.ylabel('Total Expenses')
+plt.title('Monthly Expenses')
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:36:26 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:36:26 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 11:36:26 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:36:26 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:36:26 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:38:01 [INFO] Question: Buatkan visualisasi dengan kategori terbesar pada data tersebut
+2025-01-19 11:38:01 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:38:01 [INFO] Prompt ID: 6f3d5782-1d39-4846-ae87-38f6730fd62a
+2025-01-19 11:38:01 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:38:01 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:38:01 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:38:01 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:38:01 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+22,2025-01-05,500000.0,tuition,Education
+19,2025-01-14,300000.0,miscellaneous,Others
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Buatkan visualisasi dengan kategori terbesar pada data tersebut
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:38:01 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:38:05 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+22,2025-01-05,500000.0,tuition,Education
+19,2025-01-14,300000.0,miscellaneous,Others
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Buatkan visualisasi dengan kategori terbesar pada data tersebut
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:38:05 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:38:05 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:38:05 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:38:05 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:38:05 [INFO] 
+Code running:
+```
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:38:06 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:38:06 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:38:06 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:38:06 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:38:06 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:38:06 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+22,2025-01-05,500000.0,tuition,Education
+19,2025-01-14,300000.0,miscellaneous,Others
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Buatkan visualisasi dengan kategori terbesar pada data tersebut
+
+You generated this python code:
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:38:06 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:38:10 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+22,2025-01-05,500000.0,tuition,Education
+19,2025-01-14,300000.0,miscellaneous,Others
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Buatkan visualisasi dengan kategori terbesar pada data tersebut
+
+You generated this python code:
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:38:10 [INFO] Code generated:
+            ```
+            import matplotlib.pyplot as plt
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:38:10 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:38:10 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:38:10 [INFO] 
+Code running:
+```
+df = dfs[0]
+category = df.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+plt.figure(figsize=(10, 5))
+plt.bar(df['category'], df['amount'])
+plt.title(f'Kategori Terbesar: {category}')
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah')
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:38:10 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:38:10 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:38:10 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:38:48 [INFO] Question: dapatkah anda memberikan visualisasi pengeluaran terbesar saya berdasarkan kategori?
+2025-01-19 11:38:48 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:38:48 [INFO] Prompt ID: f1e658a9-b32c-4eed-b30c-5ef16bb4a447
+2025-01-19 11:38:48 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:38:48 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:38:48 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:38:48 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:38:48 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+25,2025-01-11,500000.0,Gasoline,Transportation
+9,2025-01-16,400000.0,weddings,Social Events
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda memberikan visualisasi pengeluaran terbesar saya berdasarkan kategori?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:38:48 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:38:53 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+25,2025-01-11,500000.0,Gasoline,Transportation
+9,2025-01-16,400000.0,weddings,Social Events
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkah anda memberikan visualisasi pengeluaran terbesar saya berdasarkan kategori?
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:38:53 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:38:53 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:38:53 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:38:53 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:38:53 [INFO] 
+Code running:
+```
+df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:38:53 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:38:53 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:38:53 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:38:53 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:38:53 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:38:53 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+25,2025-01-11,500000.0,Gasoline,Transportation
+9,2025-01-16,400000.0,weddings,Social Events
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi pengeluaran terbesar saya berdasarkan kategori?
+
+You generated this python code:
+df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:38:53 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:38:58 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+25,2025-01-11,500000.0,Gasoline,Transportation
+9,2025-01-16,400000.0,weddings,Social Events
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkah anda memberikan visualisasi pengeluaran terbesar saya berdasarkan kategori?
+
+You generated this python code:
+df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 9, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:38:58 [INFO] Code generated:
+            ```
+            df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:38:58 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:38:58 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:38:58 [INFO] 
+Code running:
+```
+df = dfs[0]
+pengeluaran_terbesar = df.groupby('category')['amount'].sum().sort_values(ascending=False).reset_index()
+plt.figure(figsize=(10, 5))
+plt.bar(pengeluaran_terbesar['category'], pengeluaran_terbesar['amount'])
+plt.xlabel('Kategori')
+plt.ylabel('Jumlah Pengeluaran')
+plt.title('Pengeluaran Terbesar Berdasarkan Kategori')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:38:58 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:38:58 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:38:58 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:43:00 [INFO] Question: {"viz_type":"bar chart", "x":"category", "y":"amount", "title": "Biggest Expense by Category"}
+2025-01-19 11:43:00 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:43:00 [INFO] Prompt ID: 30d438a3-de47-46db-b75f-1e7745901a81
+2025-01-19 11:43:00 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:43:00 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:43:00 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:43:00 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:43:00 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+9,2025-01-16,400000.0,weddings,Social Events
+22,2025-01-05,500000.0,tuition,Education
+14,2025-01-06,500000.0,Gasoline,Transportation
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"viz_type":"bar chart", "x":"category", "y":"amount", "title": "Biggest Expense by Category"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:43:00 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:43:03 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+9,2025-01-16,400000.0,weddings,Social Events
+22,2025-01-05,500000.0,tuition,Education
+14,2025-01-06,500000.0,Gasoline,Transportation
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"viz_type":"bar chart", "x":"category", "y":"amount", "title": "Biggest Expense by Category"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:43:03 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+category = transactions.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+amount = transactions.groupby('category')['amount'].sum().sort_values(ascending=False).values[0]
+# Declare result var: 
+result = {
+    "type": "string",
+    "value": f"The biggest expense is {category} with the amount of {amount}."
+}
+            ```
+            
+2025-01-19 11:43:03 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:43:03 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:43:03 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+category = transactions.groupby('category')['amount'].sum().sort_values(ascending=False).index[0]
+amount = transactions.groupby('category')['amount'].sum().sort_values(ascending=False).values[0]
+result = {'type': 'string', 'value': f'The biggest expense is {category} with the amount of {amount}.'}
+        ```
+2025-01-19 11:43:03 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:43:03 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:43:03 [INFO] Answer: {'type': 'string', 'value': 'The biggest expense is Foods & Drinks with the amount of 6000000.0.'}
+2025-01-19 11:43:03 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:43:10 [INFO] Question: {"viz_type":"bar chart", "x":"transaction_category", "y":"amount"}
+2025-01-19 11:43:10 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:43:10 [INFO] Prompt ID: d7f21859-29be-4e2a-a3e2-ee22687d08a5
+2025-01-19 11:43:11 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:43:11 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:43:11 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:43:11 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:43:11 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+17,2025-01-07,700000.0,Fashion,Shopping
+29,2025-01-16,1000000.0,cable tv,Bills
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"viz_type":"bar chart", "x":"transaction_category", "y":"amount"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:43:11 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:43:14 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+17,2025-01-07,700000.0,Fashion,Shopping
+29,2025-01-16,1000000.0,cable tv,Bills
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ {"viz_type":"bar chart", "x":"transaction_category", "y":"amount"}
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:43:14 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:43:14 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:43:14 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:43:14 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:43:14 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:43:14 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:43:14 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 8, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:43:14 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:43:14 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:43:14 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:43:14 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+17,2025-01-07,700000.0,Fashion,Shopping
+29,2025-01-16,1000000.0,cable tv,Bills
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ {"viz_type":"bar chart", "x":"transaction_category", "y":"amount"}
+
+You generated this python code:
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 8, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:43:14 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:43:18 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+17,2025-01-07,700000.0,Fashion,Shopping
+29,2025-01-16,1000000.0,cable tv,Bills
+16,2024-12-24,1500000.0,restaurants,Foods & Drinks
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ {"viz_type":"bar chart", "x":"transaction_category", "y":"amount"}
+
+You generated this python code:
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 8, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:43:18 [INFO] Code generated:
+            ```
+            import matplotlib.pyplot as plt
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:43:18 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:43:18 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:43:18 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['transaction_category'] = transactions['category']
+fig, ax = plt.subplots()
+ax.bar(transactions['transaction_category'], transactions['amount'])
+plt.xticks(rotation=90)
+plt.xlabel('transaction_category')
+plt.ylabel('amount')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:43:18 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:43:18 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:43:18 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:43:19 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:43:23 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:43:28 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:43:33 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 8.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:43:41 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 10.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:44:53 [INFO] Question: dapatkan visualisasi pengeluaran terbesar saya berdasarkan kategori
+2025-01-19 11:44:53 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:44:53 [INFO] Prompt ID: 609f3412-e962-4b0e-a2a5-b417cff24314
+2025-01-19 11:44:53 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:44:53 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:44:53 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:44:54 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:44:54 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+4,2025-01-14,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkan visualisasi pengeluaran terbesar saya berdasarkan kategori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:44:54 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:44:59 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+4,2025-01-14,1000000.0,cable tv,Bills
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ dapatkan visualisasi pengeluaran terbesar saya berdasarkan kategori
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:44:59 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:44:59 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:44:59 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:44:59 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:44:59 [INFO] 
+Code running:
+```
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:44:59 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:44:59 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 10, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:44:59 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:44:59 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:44:59 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:44:59 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+4,2025-01-14,1000000.0,cable tv,Bills
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkan visualisasi pengeluaran terbesar saya berdasarkan kategori
+
+You generated this python code:
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 10, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:44:59 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:45:03 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+24,2024-12-26,200000.0,Brizzi BRI,Topup
+4,2025-01-14,1000000.0,cable tv,Bills
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ dapatkan visualisasi pengeluaran terbesar saya berdasarkan kategori
+
+You generated this python code:
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 10, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:45:04 [INFO] Code generated:
+            ```
+            import matplotlib.pyplot as plt
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:45:04 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:45:04 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:45:04 [INFO] 
+Code running:
+```
+df = dfs[0]
+pengeluaran_df = df[df['amount'] < 0]
+group = pengeluaran_df.groupby('category')['amount'].sum().reset_index().sort_values(by='amount')
+plt.figure(figsize=(10, 5))
+plt.bar(group['category'], group['amount'])
+plt.xlabel('Category')
+plt.ylabel('Amount')
+plt.title('Biggest Expense by Category')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:45:04 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:45:04 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:45:04 [INFO] Executing Step 8: ResultParsing
+2025-01-19 11:45:40 [INFO] Question: Visualisasi pengeluaran terbesar berdasarkan kategori pada transaksi saya
+2025-01-19 11:45:40 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 11:45:40 [INFO] Prompt ID: d690c30b-59f4-41e4-9e4a-711cf27d89bc
+2025-01-19 11:45:40 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 11:45:40 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 11:45:40 [INFO] Executing Step 1: CacheLookup
+2025-01-19 11:45:41 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 11:45:41 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+26,2024-12-19,300000.0,movies,Entertainment
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran terbesar berdasarkan kategori pada transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 11:45:41 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 11:45:46 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+26,2024-12-19,300000.0,movies,Entertainment
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ Visualisasi pengeluaran terbesar berdasarkan kategori pada transaksi saya
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 11:45:46 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+# group the dataframe by category and sum the amount
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+
+# create the bar chart
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+
+# save the plot as png
+plt.savefig('temp_chart.png')
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 11:45:46 [INFO] Executing Step 4: CachePopulation
+2025-01-19 11:45:46 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 11:45:46 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:45:46 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:45:46 [INFO] Executing Step 6: CodeExecution
+2025-01-19 11:45:46 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 11:45:46 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 11:45:46 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 11:45:46 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 11:45:46 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+26,2024-12-19,300000.0,movies,Entertainment
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Visualisasi pengeluaran terbesar berdasarkan kategori pada transaksi saya
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 11:45:46 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 11:45:47 [WARNING] Retrying langchain_google_vertexai.chat_models._completion_with_retry.<locals>._completion_with_retry_inner in 4.0 seconds as it raised ResourceExhausted: 429 Quota exceeded for aiplatform.googleapis.com/generate_content_requests_per_minute_per_project_per_base_model with base model: gemini-1.5-pro. Please submit a quota increase request. https://cloud.google.com/vertex-ai/docs/generative-ai/quotas-genai..
+2025-01-19 11:45:56 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+19,2025-01-14,300000.0,miscellaneous,Others
+7,2024-12-21,300000.0,miscellaneous,Others
+26,2024-12-19,300000.0,movies,Entertainment
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ Visualisasi pengeluaran terbesar berdasarkan kategori pada transaksi saya
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 11:45:56 [INFO] Code generated:
+            ```
+            transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+# plt.tight_layout() <-- Removed this line
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 11:45:56 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 11:45:56 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 11:45:56 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+category = transactions.groupby('category')['amount'].sum().reset_index()
+category = category.sort_values(by='amount', ascending=False)
+plt.figure(figsize=(10, 5))
+plt.bar(category['category'], category['amount'])
+plt.xlabel('Category')
+plt.ylabel('Total Amount')
+plt.title('Largest Expenses by Category')
+plt.xticks(rotation=45, ha='right')
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 11:45:56 [INFO] Executing Step 7: ResultValidation
+2025-01-19 11:45:56 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 11:45:56 [INFO] Executing Step 8: ResultParsing
+2025-01-19 15:49:03 [INFO] Question: show me the trend transaction overtime
+2025-01-19 15:49:03 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 15:49:03 [INFO] Prompt ID: 8920529b-d722-4de0-8622-b3d0868f6c47
+2025-01-19 15:49:03 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 15:49:39 [INFO] Question: show me the trend transaction overtime
+2025-01-19 15:49:40 [INFO] Running PandasAI with langchain_vertexai LLM...
+2025-01-19 15:49:40 [INFO] Prompt ID: 41f5f1a1-837b-47c3-88fc-1654f7ced0aa
+2025-01-19 15:49:40 [INFO] Executing Pipeline: GenerateChatPipeline
+2025-01-19 15:49:40 [INFO] Executing Step 0: ValidatePipelineInput
+2025-01-19 15:49:40 [INFO] Executing Step 1: CacheLookup
+2025-01-19 15:49:40 [INFO] Executing Step 2: PromptGeneration
+2025-01-19 15:49:40 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+28,2024-12-17,200000.0,Brizzi BRI,Topup
+18,2025-01-12,400000.0,weddings,Social Events
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ show me the trend transaction overtime
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+2025-01-19 15:49:40 [INFO] Executing Step 3: CodeGenerator
+2025-01-19 15:49:48 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+28,2024-12-17,200000.0,Brizzi BRI,Topup
+18,2025-01-12,400000.0,weddings,Social Events
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+
+
+Update this initial code:
+```python
+# TODO: import the required dependencies
+import pandas as pd
+
+# Write code here
+
+# Declare result var: 
+type (possible values "string", "number", "dataframe", "plot"). Examples: { "type": "string", "value": f"The highest salary is {highest_salary}." } or { "type": "number", "value": 125 } or { "type": "dataframe", "value": pd.DataFrame({...}) } or { "type": "plot", "value": "temp_chart.png" }
+
+```
+
+
+
+### QUERY
+ show me the trend transaction overtime
+
+Variable `dfs: list[pd.DataFrame]` is already declared.
+
+At the end, declare "result" variable as a dictionary of type and value.
+
+If you are asked to plot a chart, use "matplotlib" for charts, save as png.
+
+
+Generate python code and return full updated code:
+            
+2025-01-19 15:49:48 [INFO] Code generated:
+            ```
+            # TODO: import the required dependencies
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Write code here
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('temp_chart.png')
+
+
+# Declare result var: 
+result = {
+    "type": "plot",
+    "value": "temp_chart.png"
+}
+            ```
+            
+2025-01-19 15:49:48 [INFO] Executing Step 4: CachePopulation
+2025-01-19 15:49:49 [INFO] Executing Step 5: CodeCleaning
+2025-01-19 15:49:49 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 15:49:49 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 15:49:49 [INFO] Executing Step 6: CodeExecution
+2025-01-19 15:49:49 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 15:49:49 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 15:49:49 [ERROR] Failed with error: Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+2025-01-19 15:49:49 [WARNING] Failed to execute code retrying with a correction framework [retry number: 1]
+2025-01-19 15:49:49 [INFO] Executing Pipeline: ErrorCorrectionPipeline
+2025-01-19 15:49:49 [INFO] Executing Step 0: ErrorPromptGeneration
+2025-01-19 15:49:49 [INFO] Using prompt: <dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+28,2024-12-17,200000.0,Brizzi BRI,Topup
+18,2025-01-12,400000.0,weddings,Social Events
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ show me the trend transaction overtime
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+2025-01-19 15:49:49 [INFO] Executing Step 1: CodeGenerator
+2025-01-19 15:49:54 [INFO] Prompt used:
+            
+<dataframe name="transactions">
+dfs[0]:30x5
+id,date,amount,description,category
+28,2024-12-17,200000.0,Brizzi BRI,Topup
+18,2025-01-12,400000.0,weddings,Social Events
+5,2025-01-11,500000.0,tuition,Education
+</dataframe>
+
+
+The user asked the following question:
+### QUERY
+ show me the trend transaction overtime
+
+You generated this python code:
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+
+It fails with the following error:
+Traceback (most recent call last):
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 85, in execute
+    result = self.execute_code(code_to_run, code_context)
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/pipelines/chat/code_execution.py", line 174, in execute_code
+    exec(code, environment)
+  File "<string>", line 11, in <module>
+  File "/media/daffaa/Wudapp/Kazee-test/.venv/lib/python3.10/site-packages/pandasai/safe_libs/restricted_matplotlib.py", line 75, in __getattr__
+    raise AttributeError(f"'{name}' is not allowed in RestrictedMatplotlib")
+AttributeError: 'tight_layout' is not allowed in RestrictedMatplotlib
+
+
+Fix the python code above and return the new python code:
+            
+2025-01-19 15:49:54 [INFO] Code generated:
+            ```
+            transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+            ```
+            
+2025-01-19 15:49:54 [INFO] Executing Step 2: CodeCleaning
+2025-01-19 15:49:54 [INFO] Saving charts to /media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png
+2025-01-19 15:49:54 [INFO] 
+Code running:
+```
+transactions = dfs[0]
+transactions['date'] = pd.to_datetime(transactions['date'])
+transactions['month_year'] = transactions['date'].dt.to_period('M')
+transactions_overtime = transactions.groupby('month_year')['amount'].sum().reset_index()
+plt.figure(figsize=(10, 6))
+plt.plot(transactions_overtime['month_year'].astype(str), transactions_overtime['amount'])
+plt.xlabel('Month-Year')
+plt.ylabel('Total Amount')
+plt.title('Trend of Transaction Amount Overtime')
+plt.xticks(rotation=45)
+plt.savefig('/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png', bbox_inches='tight')
+result = {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+        ```
+2025-01-19 15:49:54 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 15:49:54 [INFO] Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-01-19 15:49:54 [INFO] Executing Step 7: ResultValidation
+2025-01-19 15:49:54 [INFO] Answer: {'type': 'plot', 'value': '/media/daffaa/Wudapp/Kazee-test/exports/charts/temp_chart.png'}
+2025-01-19 15:49:54 [INFO] Executing Step 8: ResultParsing
+2025-01-19 16:29:58 [INFO] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
